@@ -1,16 +1,16 @@
 package bugbusters.bots.model;
 
+import java.awt.Point;
+
 public class GameObject {
 
 	private Double timeStamp;
-	private Double xPos;
-	private Double yPos;
+	private Point position;
 
-	public GameObject(Double timeStamp, Double xPos, Double yPos) {
+	public GameObject(Double timeStamp, Point position) {
 		super();
 		this.timeStamp = timeStamp;
-		this.xPos = xPos;
-		this.yPos = yPos;
+		this.position = position;
 	}
 
 	public Double getTimeStamp() {
@@ -21,20 +21,12 @@ public class GameObject {
 		this.timeStamp = timeStamp;
 	}
 
-	public Double getxPos() {
-		return xPos;
+	public Point getPosition() {
+		return position;
 	}
 
-	public void setxPos(Double xPos) {
-		this.xPos = xPos;
-	}
-
-	public Double getyPos() {
-		return yPos;
-	}
-
-	public void setyPos(Double yPos) {
-		this.yPos = yPos;
+	public void setPosition(Point position) {
+		this.position = position;
 	}
 
 }
