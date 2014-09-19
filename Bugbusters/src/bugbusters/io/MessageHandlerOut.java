@@ -1,0 +1,16 @@
+package bugbusters.io;
+
+/**
+ * Soll ein Kommando, dass der Roboter ausführen soll an den Server senden. Evtl
+ * weitere Methoden?!?!?
+ * 
+ * @author Jannick
+ *
+ */
+public class MessageHandlerOut {
+
+	public void sendMessage(String message) {
+		System.out.println(message);
+		System.out.flush();
+	}
+}
