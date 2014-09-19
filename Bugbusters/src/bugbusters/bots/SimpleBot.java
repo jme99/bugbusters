@@ -36,7 +36,8 @@ public class SimpleBot extends AbstractBot {
 
 					case MessageHandlerIn.INITIALIZE:
 						if ("1".equals(st.nextToken())) {
-							handlerOut.sendMessage("Name " + model.getName()
+							handlerOut.sendMessage("Name "
+									+ getModel().getName()
 									+ " Team: BUG-BUSTERS");
 							handlerOut.sendMessage("Colour FF0000 00FF00");
 						}
@@ -47,12 +48,12 @@ public class SimpleBot extends AbstractBot {
 						break;
 
 					case MessageHandlerIn.YOUR_COLOUR:
-						model.setColor(st.nextToken());
+						getModel().setColor(st.nextToken());
 						break;
 					case MessageHandlerIn.GAME_STARTS:
 						// um zu sehen ob wir laufen
 						handlerOut.sendMessage("Shoot 1.0");
-						model.setGameStarted(true);
+						getModel().setGameStarted(true);
 						break;
 
 					case MessageHandlerIn.EXIT_ROBOT:
@@ -60,10 +61,10 @@ public class SimpleBot extends AbstractBot {
 						break;
 
 					case MessageHandlerIn.DEAD:
-						model.setDead(true);
+						getModel().setDead(true);
 
 					case MessageHandlerIn.GAME_FINISHES:
-						model.setGameStarted(false);
+						getModel().setGameStarted(false);
 						break;
 
 					default:
