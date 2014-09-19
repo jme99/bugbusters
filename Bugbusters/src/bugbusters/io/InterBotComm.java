@@ -1,8 +1,13 @@
 package bugbusters.io;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,6 +20,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
+/**
+ * Serves to connect all bots via TCP-Connections.
+ * 
+ * @author kdittmer
+ * 
+ */
 public class InterBotComm implements Closeable {
 
 	/** Interface to implement by those that wants to listen to other bots. */
@@ -131,12 +144,32 @@ public class InterBotComm implements Closeable {
 	 * 
 	 * @param obj
 	 */
-	public synchronized void sendData(Object obj) {
+	public synchronized void sendTextLine(Object obj) {
 		for (Entry<Integer, Resources> entry : otherBots.entrySet()) {
 			PrintWriter pw = entry.getValue().pw;
 			pw.println(obj.toString());
 			pw.flush();
 		}
+	}
+
+	/**
+	 * Serializes <code>obj</code> into a on-line String and sends it to all
+	 * other objects
+	 */
+	public void sendObject(Serializable obj) throws IOException {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(bos);
+		oos.writeObject(obj);
+		String str = StringEscapeUtils.escapeJava(bos.toString());
+		sendTextLine(str);
+		oos.close();
+	}
+
+	/** De-serializes a String into an Object */
+	public static Object unescapeObject(String str) throws IOException, ClassNotFoundException {
+		String unescaped = StringEscapeUtils.unescapeJava(str);
+		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(unescaped.getBytes()));
+		return ois.readObject();
 	}
 
 	@Override
@@ -148,6 +181,7 @@ public class InterBotComm implements Closeable {
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
+		@SuppressWarnings("resource")
 		InterBotComm comm = new InterBotComm();
 		comm.addOtherBotsDataListener(new OtherBotsDataListener() {
 			@Override
@@ -157,7 +191,7 @@ public class InterBotComm implements Closeable {
 		});
 		while (true) {
 			Thread.sleep(1000);
-			comm.sendData("XX:" + comm.hashCode());
+			comm.sendTextLine("XX:" + comm.hashCode());
 		}
 	}
 }
