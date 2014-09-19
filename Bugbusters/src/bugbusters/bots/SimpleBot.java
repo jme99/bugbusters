@@ -11,13 +11,18 @@ public class SimpleBot extends AbstractBot {
 		super();
 	}
 
+	public static void main(String[] args) {
+		new SimpleBot().run();
+	}
+
 	@Override
 	public void run() {
 		do {
 			try {
 				if (bf.ready()) {
-					StringTokenizer st = new StringTokenizer(bf.readLine());
-					handlerOut.echo("Empfangen: " + st.toString());
+					String line = bf.readLine();
+					StringTokenizer st = new StringTokenizer(line);
+					handlerOut.echo("Empfangen: " + line);
 					// TODO mach etwas mit der Nachricht
 					String token = null;
 					if (st.hasMoreTokens()) {

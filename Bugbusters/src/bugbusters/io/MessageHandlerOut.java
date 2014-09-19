@@ -10,11 +10,12 @@ package bugbusters.io;
 public class MessageHandlerOut {
 
 	public void sendMessage(String message) {
+		echo(message);
 		System.out.println(message);
 		System.out.flush();
 	}
 
 	public final void echo(String s) {
-		sendMessage("Print " + s);
+		System.out.println("Print " + s);
 	}
 }
