@@ -24,6 +24,7 @@ public class BotModel {
 	private double level;
 
 	private boolean dead;
+	private boolean gameStarted;
 
 	public String getName() {
 		return name;
@@ -111,5 +112,13 @@ public class BotModel {
 
 	public void setDead(boolean dead) {
 		this.dead = dead;
+	}
+
+	public boolean isGameStarted() {
+		return gameStarted;
+	}
+
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
 	}
 }
