@@ -3,7 +3,6 @@ package bugbusters.bots;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import bugbusters.bots.AbstractBot;
 import bugbusters.io.MessageHandlerIn;
 
 public class SimpleBot extends AbstractBot {
@@ -18,7 +17,7 @@ public class SimpleBot extends AbstractBot {
 			try {
 				if (bf.ready()) {
 					StringTokenizer st = new StringTokenizer(bf.readLine());
-					handlerOut.echo("Empfangen: " st.toString());
+					handlerOut.echo("Empfangen: " + st.toString());
 					// TODO mach etwas mit der Nachricht
 					String token = null;
 					if (st.hasMoreTokens()) {
