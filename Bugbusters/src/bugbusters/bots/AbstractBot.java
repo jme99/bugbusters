@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import bugbusters.bots.model.BotModel;
+import bugbusters.bots.model.Message;
 import bugbusters.io.MessageHandlerIn;
 import bugbusters.io.MessageHandlerOut;
 
@@ -27,4 +28,7 @@ public class AbstractBot extends Thread {
 		model = new BotModel();
 	}
 
+	protected Message parseMessage(String inMessage) {
+		return new Message();
+	}
 }

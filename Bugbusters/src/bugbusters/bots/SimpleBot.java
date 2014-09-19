@@ -3,6 +3,7 @@ package bugbusters.bots;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import bugbusters.bots.AbstractBot;
 import bugbusters.io.MessageHandlerIn;
 
 public class SimpleBot extends AbstractBot {
