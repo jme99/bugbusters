@@ -9,21 +9,21 @@ package bugbusters.bots.model;
  */
 public enum MessageType {
 	INITIALIZE(1001), //
-	YOUR_NAME(1002), //
-	YOUR_COLOUR(1003), //
-	GAME_OPTION(1004), //
-	GAME_STARTS(1005), //
+	YOURNAME(1002), //
+	YOURCOLOUR(1003), //
+	GAMEOPTION(1004), //
+	GAMESTARTS(1005), //
 	RADAR(1006), //
 	INFO(1007), //
-	ROBOT_INFO(1008), //
-	ROTATION_REACHED(1009), //
+	ROBOTINFO(1008), //
+	ROTATIONREACHED(1009), //
 	ENERGY(1010), //
-	ROBOTS_LEFT(1011), //
+	ROBOTSLEFT(1011), //
 	COLLISION(1012), //
 	WARNING(1013), //
 	DEAD(1014), //
-	GAME_FINISHES(1015), //
-	EXIT_ROBOT(1016), //
+	GAMEFINISHES(1015), //
+	EXITROBOT(1016), //
 	COORDINATES(1017), //
 	UNKNOWN_MESSAGE_TO_ROBOT(-1);
 	private int messageId;
@@ -38,10 +38,11 @@ public enum MessageType {
 
 	public static MessageType parseMessage(String id) {
 		for (MessageType type : values()) {
-			if (Integer.parseInt(id) == type.getMessageId()) {
+			if (id.equalsIgnoreCase(type.toString())) {
 				return type;
 			}
 		}
-		return null;
+		System.out.println("Echo unknown Message: " + id);
+		return UNKNOWN_MESSAGE_TO_ROBOT;
 	}
 }

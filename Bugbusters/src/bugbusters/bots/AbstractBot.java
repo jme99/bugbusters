@@ -50,40 +50,45 @@ public class AbstractBot extends Thread {
 			// message.setEnergyLevel(parseDouble(chunks[1]));
 			model.setLevel(parseDouble(chunks[1]));
 			break;
-		case EXIT_ROBOT:
+		case EXITROBOT:
 			break;
-		case GAME_FINISHES:
+		case GAMEFINISHES:
 			break;
-		case GAME_OPTION:
+		case GAMEOPTION:
 			break;
-		case GAME_STARTS:
+		case GAMESTARTS:
 			break;
 		case INFO:
 			break;
 		case INITIALIZE:
 			message.setYesNo(parseBoolean(chunks[1]));
+			if ("1".equals(chunks[1])) {
+				handlerOut.sendMessage("Name " + model.getName()
+						+ " Team: BUG-BUSTERS");
+				handlerOut.sendMessage("Colour FF0000 00FF00");
+			}
 			break;
 		case RADAR:
 			message.setVelocity(parseDouble(chunks[1]));
 			message.setAngle(parseDouble(chunks[3]));
 			message.setObjectType(ObjectType.parseMessage(chunks[2]));
 			break;
-		case ROBOTS_LEFT:
+		case ROBOTSLEFT:
 			message.setLeftRobots(parseInteger(chunks[1]));
 			break;
-		case ROBOT_INFO:
+		case ROBOTINFO:
 			message.setAngle(parseDouble(chunks[1]));
 			message.setYesNo(parseBoolean(chunks[2]));
 			break;
-		case ROTATION_REACHED:
+		case ROTATIONREACHED:
 			break;
 		case UNKNOWN_MESSAGE_TO_ROBOT:
 			break;
 		case WARNING:
 			break;
-		case YOUR_COLOUR:
+		case YOURCOLOUR:
 			break;
-		case YOUR_NAME:
+		case YOURNAME:
 			break;
 		default:
 			break;

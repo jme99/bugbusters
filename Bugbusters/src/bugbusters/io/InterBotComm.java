@@ -49,8 +49,8 @@ public class InterBotComm implements Closeable {
 	private final ServerSocket serverSocket;
 
 	private int port;
-	private final Map<Integer, Resources> otherBots = new HashMap<>();
-	private final Collection<OtherBotsDataListener> listeners = new ArrayList<>();
+	private final Map<Integer, Resources> otherBots = new HashMap<Integer, Resources>();
+	private final Collection<OtherBotsDataListener> listeners = new ArrayList<OtherBotsDataListener>();
 
 	/**
 	 * Does the main work of setting up the connection with the other bots. It
