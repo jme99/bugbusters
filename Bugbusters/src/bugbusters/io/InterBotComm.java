@@ -36,8 +36,8 @@ public class InterBotComm implements Closeable {
 	private final ServerSocket serverSocket;
 
 	private int port;
-	private final Map<Integer, Resources> otherBots = new HashMap<>();
-	private final Collection<OtherBotsDataListener> listeners = new ArrayList<>();
+	private final Map<Integer, Resources> otherBots = new HashMap<Integer, Resources>();
+	private final Collection<OtherBotsDataListener> listeners = new ArrayList<OtherBotsDataListener>();
 
 	/**
 	 * Does the main work of setting up the connection with the other bots. It
@@ -78,20 +78,32 @@ public class InterBotComm implements Closeable {
 							@Override
 							public void run() {
 								try {
-									Scanner scanner = new Scanner(socket.getInputStream());
+									Scanner scanner = new Scanner(socket
+											.getInputStream());
 									String firstLine = scanner.nextLine();
-									Pattern pattern = Pattern.compile("CONNECT TO:(\\d+)");
-									Matcher matcher = pattern.matcher(firstLine);
+									Pattern pattern = Pattern
+											.compile("CONNECT TO:(\\d+)");
+									Matcher matcher = pattern
+											.matcher(firstLine);
 									Socket socketWriter = null;
 									if (matcher.matches()) {
-										int port = Integer.parseInt(matcher.group(1));
-										socketWriter = new Socket("localhost", port);
-										otherBots.put(port, new Resources(new PrintWriter(socketWriter.getOutputStream()), socketWriter));
+										int port = Integer.parseInt(matcher
+												.group(1));
+										socketWriter = new Socket("localhost",
+												port);
+										otherBots.put(
+												port,
+												new Resources(
+														new PrintWriter(
+																socketWriter
+																		.getOutputStream()),
+														socketWriter));
 									} else {
 										receiveData(socket.getPort(), firstLine);
 									}
 									while (scanner.hasNextLine()) {
-										receiveData(socket.getPort(), scanner.nextLine());
+										receiveData(socket.getPort(),
+												scanner.nextLine());
 									}
 									if (socketWriter != null)
 										socketWriter.close();
@@ -147,7 +159,8 @@ public class InterBotComm implements Closeable {
 		}
 	}
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
 		InterBotComm comm = new InterBotComm();
 		comm.addOtherBotsDataListener(new OtherBotsDataListener() {
 			@Override
