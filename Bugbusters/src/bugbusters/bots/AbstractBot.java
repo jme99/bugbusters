@@ -22,7 +22,7 @@ public class AbstractBot extends Thread {
 	protected BufferedReader bf;
 	protected MessageHandlerIn handlerIn;
 	protected MessageHandlerOut handlerOut;
-	private BotModel model;
+	protected BotModel model;
 	private World world;
 
 	public AbstractBot() {
