@@ -14,7 +14,7 @@ import bugbusters.io.MessageHandlerOut;
  * @author Jannick
  *
  */
-public abstract class AbstractBot extends Thread {
+public class AbstractBot extends Thread {
 
 	protected BufferedReader bf;
 	protected MessageHandlerIn handlerIn;
@@ -25,6 +25,7 @@ public abstract class AbstractBot extends Thread {
 		bf = new BufferedReader(new InputStreamReader(System.in));
 		handlerIn = new MessageHandlerIn();
 		handlerOut = new MessageHandlerOut();
+		model = new BotModel();
 	}
 
 	protected Message parseMessage(String inMessage) {
