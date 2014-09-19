@@ -9,5 +9,7 @@ public class SimpleBot extends AbstractBot {
 	@Override
 	public void run() {
 		// TODO
+		
+		
 	}
 }

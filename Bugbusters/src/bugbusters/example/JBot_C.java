@@ -1,3 +1,4 @@
+package bugbusters.example;
 //
 //
 // JBot_C v0.3.0 in JAVA

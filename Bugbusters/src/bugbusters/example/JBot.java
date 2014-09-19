@@ -1,3 +1,5 @@
+package bugbusters.example;
+
 //
 //
 // JBot v0.2.0 in JAVA

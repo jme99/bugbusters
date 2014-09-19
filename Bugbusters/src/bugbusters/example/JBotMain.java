@@ -1,3 +1,5 @@
+package bugbusters.example;
+
 //
 //
 // JBotMain v0.2.0
