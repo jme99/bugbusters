@@ -17,6 +17,7 @@ public class SimpleBot extends AbstractBot {
 			try {
 				if (bf.ready()) {
 					StringTokenizer st = new StringTokenizer(bf.readLine());
+					handlerOut.echo("Empfangen: " st.toString());
 					// TODO mach etwas mit der Nachricht
 					String token = null;
 					if (st.hasMoreTokens()) {
