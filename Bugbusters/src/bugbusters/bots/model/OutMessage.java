@@ -7,6 +7,8 @@ package bugbusters.bots.model;
  * @author User1
  *
  */
-public class OutMessage {
+public interface OutMessage {
+
+	public String getMessageString();
 
 }
