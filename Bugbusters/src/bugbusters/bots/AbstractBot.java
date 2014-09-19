@@ -7,6 +7,7 @@ import bugbusters.bots.model.BotModel;
 import bugbusters.bots.model.Message;
 import bugbusters.bots.model.MessageType;
 import bugbusters.bots.model.ObjectType;
+import bugbusters.bots.model.World;
 import bugbusters.io.MessageHandlerIn;
 import bugbusters.io.MessageHandlerOut;
 
@@ -21,13 +22,15 @@ public class AbstractBot extends Thread {
 	protected BufferedReader bf;
 	protected MessageHandlerIn handlerIn;
 	protected MessageHandlerOut handlerOut;
-	protected BotModel model;
+	private BotModel model;
+	private World world;
 
 	public AbstractBot() {
 		bf = new BufferedReader(new InputStreamReader(System.in));
 		handlerIn = new MessageHandlerIn();
 		handlerOut = new MessageHandlerOut();
 		model = new BotModel();
+		world = new World();
 	}
 
 	protected Message parseMessage(String inMessage) {
@@ -41,9 +44,11 @@ public class AbstractBot extends Thread {
 		case COORDINATES:
 			break;
 		case DEAD:
+			model.setDead(true);
 			break;
 		case ENERGY:
-			message.setEnergyLevel(parseDouble(chunks[1]));
+			// message.setEnergyLevel(parseDouble(chunks[1]));
+			model.setLevel(parseDouble(chunks[1]));
 			break;
 		case EXITROBOT:
 			break;
@@ -111,4 +116,13 @@ public class AbstractBot extends Thread {
 		}
 		return false;
 	}
+
+	public BotModel getModel() {
+		return model;
+	}
+
+	public World getWorld() {
+		return world;
+	}
+
 }

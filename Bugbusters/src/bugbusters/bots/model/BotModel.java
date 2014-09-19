@@ -3,6 +3,8 @@
  */
 package bugbusters.bots.model;
 
+import java.awt.Point;
+
 /**
  * @author User1
  *
@@ -12,8 +14,7 @@ public class BotModel {
 	private String name;
 	private String color;
 
-	private double xPos;
-	private double yPos;
+	private Point position;
 	private double botAngle;
 	private double radarwAngle;
 	private double cannonAngle;
@@ -40,22 +41,6 @@ public class BotModel {
 
 	public void setColor(String color) {
 		this.color = color;
-	}
-
-	public double getxPos() {
-		return xPos;
-	}
-
-	public void setxPos(double xPos) {
-		this.xPos = xPos;
-	}
-
-	public double getyPos() {
-		return yPos;
-	}
-
-	public void setyPos(double yPos) {
-		this.yPos = yPos;
 	}
 
 	public double getBotAngle() {
@@ -120,5 +105,13 @@ public class BotModel {
 
 	public void setGameStarted(boolean gameStarted) {
 		this.gameStarted = gameStarted;
+	}
+
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
 	}
 }
