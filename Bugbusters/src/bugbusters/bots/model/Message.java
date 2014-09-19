@@ -12,10 +12,16 @@ public class Message {
 	private Double xPos;
 	private Double yPos;
 	private Double angle;
-	private Integer energyLevel;
-	private Boolean hostile;
+	private Double energyLevel;
 	private Double distance;
 	private Double velocity;
+	private boolean yesNo;
+	private Integer leftRobots;
+	private ObjectType objectType;
+
+	public Message(MessageType messageType) {
+		this.type = messageType;
+	}
 
 	public MessageType getType() {
 		return type;
@@ -49,20 +55,12 @@ public class Message {
 		this.angle = angle;
 	}
 
-	public Integer getEnergyLevel() {
+	public Double getEnergyLevel() {
 		return energyLevel;
 	}
 
-	public void setEnergyLevel(Integer energyLevel) {
+	public void setEnergyLevel(Double energyLevel) {
 		this.energyLevel = energyLevel;
-	}
-
-	public Boolean getHostile() {
-		return hostile;
-	}
-
-	public void setHostile(Boolean hostile) {
-		this.hostile = hostile;
 	}
 
 	public Double getDistance() {
@@ -79,6 +77,30 @@ public class Message {
 
 	public void setVelocity(Double velocity) {
 		this.velocity = velocity;
+	}
+
+	public boolean isYesNo() {
+		return yesNo;
+	}
+
+	public void setYesNo(boolean yesNo) {
+		this.yesNo = yesNo;
+	}
+
+	public Integer getLeftRobots() {
+		return leftRobots;
+	}
+
+	public void setLeftRobots(Integer leftRobots) {
+		this.leftRobots = leftRobots;
+	}
+
+	public ObjectType getObjectType() {
+		return objectType;
+	}
+
+	public void setObjectType(ObjectType objectType) {
+		this.objectType = objectType;
 	}
 
 }
