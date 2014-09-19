@@ -1,5 +1,6 @@
 package bugbusters.io;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.BindException;
@@ -14,18 +15,28 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InterBotComm {
+public class InterBotComm implements Closeable {
 
 	/** Interface to implement by those that wants to listen to other bots. */
 	public interface OtherBotsDataListener {
 		public void digestData(int port, String s);
 	}
 
+	private static class Resources {
+		public final PrintWriter pw;
+		public final Socket socket;
+
+		public Resources(PrintWriter pw, Socket socket) {
+			this.pw = pw;
+			this.socket = socket;
+		}
+	}
+
 	private final static int START_PORT = 13333;
 	private final ServerSocket serverSocket;
 
 	private int port;
-	private final Map<Integer, PrintWriter> otherBots = new HashMap<>();
+	private final Map<Integer, Resources> otherBots = new HashMap<>();
 	private final Collection<OtherBotsDataListener> listeners = new ArrayList<>();
 
 	/**
@@ -52,7 +63,7 @@ public class InterBotComm {
 		for (int i = START_PORT; i < port; i++) {
 			Socket socket = new Socket("localhost", i);
 			PrintWriter pw = new PrintWriter(socket.getOutputStream());
-			otherBots.put(i, pw);
+			otherBots.put(i, new Resources(pw, socket));
 			pw.println("CONNECT TO:" + port);
 			pw.flush();
 		}
@@ -75,7 +86,7 @@ public class InterBotComm {
 									if (matcher.matches()) {
 										int port = Integer.parseInt(matcher.group(1));
 										socketWriter = new Socket("localhost", port);
-										otherBots.put(port, new PrintWriter(socketWriter.getOutputStream()));
+										otherBots.put(port, new Resources(new PrintWriter(socketWriter.getOutputStream()), socketWriter));
 									} else {
 										receiveData(socket.getPort(), firstLine);
 									}
@@ -121,10 +132,18 @@ public class InterBotComm {
 	 * @param obj
 	 */
 	public synchronized void sendData(Object obj) {
-		for (Entry<Integer, PrintWriter> entry : otherBots.entrySet()) {
-			PrintWriter pw = entry.getValue();
+		for (Entry<Integer, Resources> entry : otherBots.entrySet()) {
+			PrintWriter pw = entry.getValue().pw;
 			pw.println(obj.toString());
 			pw.flush();
+		}
+	}
+
+	@Override
+	public void close() throws IOException {
+		for (Entry<Integer, Resources> entry : otherBots.entrySet()) {
+			entry.getValue().pw.close();
+			entry.getValue().socket.close();
 		}
 	}
 
