@@ -14,15 +14,15 @@ import bugbusters.io.MessageHandlerOut;
  */
 public class AbstractBot extends Thread {
 
-	BufferedReader bf;
-	MessageHandlerIn in;
-	MessageHandlerOut out;
+	protected BufferedReader bf;
+	protected MessageHandlerIn handlerIn;
+	protected MessageHandlerOut handlerOut;
 	
 	
 	public AbstractBot() {
 		bf = new BufferedReader(new InputStreamReader(System.in));
-		in = new MessageHandlerIn();
-		out = new MessageHandlerOut();
+		handlerIn = new MessageHandlerIn();
+		handlerOut = new MessageHandlerOut();
 	}
 	
 }
