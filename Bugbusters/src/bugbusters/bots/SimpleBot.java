@@ -42,12 +42,16 @@ public class SimpleBot extends AbstractBot {
 						}
 						break;
 
+					case MessageHandlerIn.ENERGY:
+						handlerOut.sendMessage("Shoot 1.0");
+						break;
+
 					case MessageHandlerIn.YOUR_COLOUR:
 						model.setColor(st.nextToken());
 						break;
 					case MessageHandlerIn.GAME_STARTS:
 						// um zu sehen ob wir laufen
-						handlerOut.sendMessage("Shoot 1");
+						handlerOut.sendMessage("Shoot 1.0");
 						model.setGameStarted(true);
 						break;
 

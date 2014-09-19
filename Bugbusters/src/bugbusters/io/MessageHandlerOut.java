@@ -17,5 +17,6 @@ public class MessageHandlerOut {
 
 	public final void echo(String s) {
 		System.out.println("Print " + s);
+		System.out.flush();
 	}
 }
