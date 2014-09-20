@@ -34,66 +34,73 @@ public class AbstractBot extends Thread {
 	}
 
 	protected Message parseMessage(String inMessage) {
-		String[] chunks = inMessage.split(" ");
-		MessageType messageType = MessageType.parseMessage(chunks[0]);
-		Message message = new Message(messageType);
+		Message message = null;
+		try {
 
-		switch (messageType) {
-		case COLLISION:
-			break;
-		case COORDINATES:
-			break;
-		case DEAD:
-			model.setDead(true);
-			break;
-		case ENERGY:
-			// message.setEnergyLevel(parseDouble(chunks[1]));
-			model.setLevel(parseDouble(chunks[1]));
-			break;
-		case EXITROBOT:
-			break;
-		case GAMEFINISHES:
-			break;
-		case GAMEOPTION:
-			break;
-		case GAMESTARTS:
-			break;
-		case INFO:
-			break;
-		case INITIALIZE:
-			message.setYesNo(parseBoolean(chunks[1]));
-			if ("1".equals(chunks[1])) {
-				handlerOut.sendMessage("Name " + model.getName()
-						+ " Team: BUG-BUSTERS");
-				handlerOut.sendMessage("Colour FF0000 00FF00");
+			String[] chunks = inMessage.split(" ");
+			MessageType messageType = MessageType.parseMessage(chunks[0]);
+			message = new Message(messageType);
+
+			switch (messageType) {
+			case COLLISION:
+				break;
+			case COORDINATES:
+				break;
+			case DEAD:
+				model.setDead(true);
+				break;
+			case ENERGY:
+				// message.setEnergyLevel(parseDouble(chunks[1]));
+				model.setLevel(parseDouble(chunks[1]));
+				break;
+			case EXITROBOT:
+				break;
+			case GAMEFINISHES:
+				break;
+			case GAMEOPTION:
+				break;
+			case GAMESTARTS:
+				break;
+			case INFO:
+				break;
+			case INITIALIZE:
+				message.setYesNo(parseBoolean(chunks[1]));
+				if ("1".equals(chunks[1])) {
+					handlerOut.sendMessage("Name " + model.getName()
+							+ " Team: BUG-BUSTERS");
+					handlerOut.sendMessage("Colour FF0000 00FF00");
+				}
+				break;
+			case RADAR:
+				message.setDistance(parseDouble(chunks[1]));
+				message.setAngle(parseDouble(chunks[3]));
+				message.setObjectType(ObjectType.parseMessage(chunks[2]));
+				break;
+			case ROBOTSLEFT:
+				message.setLeftRobots(parseInteger(chunks[1]));
+				break;
+			case ROBOTINFO:
+				message.setAngle(parseDouble(chunks[1]));
+				message.setYesNo(parseBoolean(chunks[2]));
+				break;
+			case ROTATIONREACHED:
+				break;
+			case UNKNOWN_MESSAGE_TO_ROBOT:
+				break;
+			case WARNING:
+				break;
+			case YOURCOLOUR:
+				break;
+			case YOURNAME:
+				break;
+			default:
+				break;
 			}
-			break;
-		case RADAR:
-			message.setVelocity(parseDouble(chunks[1]));
-			message.setAngle(parseDouble(chunks[3]));
-			message.setObjectType(ObjectType.parseMessage(chunks[2]));
-			break;
-		case ROBOTSLEFT:
-			message.setLeftRobots(parseInteger(chunks[1]));
-			break;
-		case ROBOTINFO:
-			message.setAngle(parseDouble(chunks[1]));
-			message.setYesNo(parseBoolean(chunks[2]));
-			break;
-		case ROTATIONREACHED:
-			break;
-		case UNKNOWN_MESSAGE_TO_ROBOT:
-			break;
-		case WARNING:
-			break;
-		case YOURCOLOUR:
-			break;
-		case YOURNAME:
-			break;
-		default:
-			break;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			message = null;
 		}
 		return message;
+
 	}
 
 	private Integer parseInteger(String string) {
