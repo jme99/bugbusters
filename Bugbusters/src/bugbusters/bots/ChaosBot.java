@@ -92,6 +92,7 @@ public class ChaosBot extends AbstractBot {
 		Double angle = message.getAngle();
 		switch (message.getObjectType()) {
 		case COOKIE:
+			moveToCookie(message);
 			break;
 		case LAST_OBJECT_TYPE:
 			break;
