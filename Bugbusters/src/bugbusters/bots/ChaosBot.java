@@ -85,7 +85,7 @@ public class ChaosBot extends AbstractBot {
 	}
 
 	private void moveToCookie(Message m) {
-		handlerOut.sendMessage("RotateTo " + 1 + " " + 1 + " " + m.getAngle());
+		handlerOut.sendMessage("Rotate 1 0");
 		handlerOut.sendMessage("Accelerate " + model.getMaxAcceleartion());
 	}
 
