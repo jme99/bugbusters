@@ -50,6 +50,8 @@ public class ChaosBot extends AbstractBot {
 						case INFO:
 							break;
 						case INITIALIZE:
+							handlerOut.sendMessage("Accelerate "
+									+ model.getMaxAcceleartion());
 							break;
 						case RADAR:
 							consumeRadar(message);
