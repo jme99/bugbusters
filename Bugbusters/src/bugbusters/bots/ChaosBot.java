@@ -40,7 +40,7 @@ public class ChaosBot extends AbstractBot {
 								if (distance < 2.0) {
 									handlerOut.sendMessage("Brake 1");
 									handlerOut.sendMessage("RotateAmount " + 7
-											+ " " + 1 + " " + 60);
+											+ " " + 1 + " " + 1.57);
 								} else {
 									handlerOut.sendMessage("Brake 0");
 									handlerOut.sendMessage("Accelerate 1");
@@ -49,11 +49,9 @@ public class ChaosBot extends AbstractBot {
 
 								handlerOut.sendMessage("Shoot 1");
 							} else if (message.getObjectType() == ObjectType.ROBOT) {
-								handlerOut.sendMessage("Sweep " + 2
-										+ " 10 10 10");
 								handlerOut.sendMessage("Shoot 5");
 							} else if (message.getObjectType() == ObjectType.COOKIE) {
-
+								moveToCookie(message);
 							}
 						}
 
@@ -66,5 +64,11 @@ public class ChaosBot extends AbstractBot {
 			}
 		} while (true); // TODO Spiel läuft
 
+	}
+
+	private void moveToCookie(Message m) {
+		handlerOut.sendMessage("RotateTo " + 7 + " " + 1 + " " + m.getAngle());
+		handlerOut.sendMessage("Accelerate " + model.getMaxAcceleartion());
+		handlerOut.sendMessage("Shoot 1");
 	}
 }
