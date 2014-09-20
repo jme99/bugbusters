@@ -8,8 +8,6 @@ import bugbusters.bots.model.ObjectType;
 
 public class ChaosBot extends AbstractBot {
 
-	private int speed = 0;
-
 	public ChaosBot() {
 		super();
 	}
@@ -27,28 +25,33 @@ public class ChaosBot extends AbstractBot {
 					handlerOut.echo("Empfangen: " + line);
 					Message message = this.parseMessage(line);
 
-					if (speed == 0) {
-						speed = 10;
-						handlerOut.sendMessage("Accelerate 10");
-					}
+					handlerOut.sendMessage("Shoot 1");
 
 					if (message != null) {
-						if (message.getType() == MessageType.RADAR) {
+						if (message.getType() == MessageType.GAMEOPTION) {
+							continue;
+						} else if (message.getType() == MessageType.GAMESTARTS) {
+							handlerOut.sendMessage("Accelerate "
+									+ model.getMaxAcceleartion());
+						} else if (message.getType() == MessageType.RADAR) {
 							Double distance = message.getDistance();
 							Double angle = message.getAngle();
 							if (message.getObjectType() == ObjectType.WALL) {
-								if (distance < 1) {
-									handlerOut.sendMessage("Rotate 7 1 90");
+								if (distance < 2.0) {
+									handlerOut.sendMessage("Brake 1");
+									handlerOut.sendMessage("RotateAmount " + 7
+											+ " " + 1 + " " + 60);
+								} else {
+									handlerOut.sendMessage("Brake 0");
+									handlerOut.sendMessage("Accelerate 1");
 								}
 							} else if (message.getObjectType() == ObjectType.MINE) {
 
-								handlerOut.sendMessage("RotateTo 7 1" + angle);
 								handlerOut.sendMessage("Shoot 1");
 							} else if (message.getObjectType() == ObjectType.ROBOT) {
-								handlerOut.sendMessage("Shoot 1");
-								handlerOut.sendMessage("Shoot 1");
-								handlerOut.sendMessage("Shoot 1");
-								handlerOut.sendMessage("Shoot 1");
+								handlerOut.sendMessage("Sweep " + 2
+										+ " 10 10 10");
+								handlerOut.sendMessage("Shoot 5");
 							} else if (message.getObjectType() == ObjectType.COOKIE) {
 
 							}

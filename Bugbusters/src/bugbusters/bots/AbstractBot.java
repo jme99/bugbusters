@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import bugbusters.bots.model.BotModel;
+import bugbusters.bots.model.GameOptionType;
 import bugbusters.bots.model.Message;
 import bugbusters.bots.model.MessageType;
 import bugbusters.bots.model.ObjectType;
@@ -58,6 +59,10 @@ public class AbstractBot extends Thread {
 			case GAMEFINISHES:
 				break;
 			case GAMEOPTION:
+				if (Integer.valueOf(chunks[1]) == GameOptionType.ROBOT_MAX_ACCELERATION
+						.getId()) {
+					model.setMaxAcceleartion(Double.valueOf(chunks[2]));
+				}
 				break;
 			case GAMESTARTS:
 				break;

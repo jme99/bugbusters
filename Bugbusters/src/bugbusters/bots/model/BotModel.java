@@ -27,6 +27,8 @@ public class BotModel {
 	private boolean dead;
 	private boolean gameStarted;
 
+	private double maxAcceleartion;
+
 	public String getName() {
 		return name;
 	}
@@ -114,4 +116,13 @@ public class BotModel {
 	public void setPosition(Point position) {
 		this.position = position;
 	}
+
+	public double getMaxAcceleartion() {
+		return maxAcceleartion;
+	}
+
+	public void setMaxAcceleartion(double maxAcceleartion) {
+		this.maxAcceleartion = maxAcceleartion;
+	}
+
 }
