@@ -130,6 +130,12 @@ public class ChaosBot extends AbstractBot {
 			// foe
 			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + angle);
 			handlerOut.sendMessage("Shoot 5");
+			handlerOut.sendMessage("Shoot 5");
+			handlerOut.sendMessage("Shoot 5");
+			handlerOut.sendMessage("Shoot 5");
+			handlerOut.sendMessage("Shoot 5");
+			handlerOut.sendMessage("Shoot 5");
+			handlerOut.sendMessage("Shoot 5");
 		}
 		// handlerOut.sendMessage("Sweep " + 2 + " 10 10 10");
 	}
