@@ -84,9 +84,8 @@ public class ChaosBot extends AbstractBot {
 	}
 
 	private void moveToCookie(Message m) {
-		handlerOut.sendMessage("RotateTo " + 7 + " " + 1 + " " + m.getAngle());
+		handlerOut.sendMessage("Rotate " + 7 + " " + 1 + " " + 0);
 		handlerOut.sendMessage("Accelerate " + model.getMaxAcceleartion());
-		handlerOut.sendMessage("Shoot 1");
 	}
 
 	private void consumeRadar(Message message) {
@@ -130,13 +129,19 @@ public class ChaosBot extends AbstractBot {
 			// foe
 			handlerOut
 					.sendMessage("RotateAmount " + 7 + " " + 10 + " " + angle);
-			handlerOut.sendMessage("Shoot 5");
-			handlerOut.sendMessage("Shoot 5");
-			handlerOut.sendMessage("Shoot 5");
-			handlerOut.sendMessage("Shoot 5");
-			handlerOut.sendMessage("Shoot 5");
-			handlerOut.sendMessage("Shoot 5");
-			handlerOut.sendMessage("Shoot 5");
+			new Thread() {
+				public void run() {
+					for (int i = 0; i < 5; i++) {
+						handlerOut.sendMessage("Shoot 5");
+						try {
+							sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				};
+			}.start();
 		}
 		// handlerOut.sendMessage("Sweep " + 2 + " 10 10 10");
 	}
