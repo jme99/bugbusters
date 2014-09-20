@@ -110,10 +110,10 @@ public class ChaosBot extends AbstractBot {
 		case SHOT:
 			break;
 		case WALL:
-			if (distance < 2.0) {
+			if (distance < 4.0) {
 				handlerOut.sendMessage("Brake 1");
-				handlerOut
-						.sendMessage("RotateAmount " + 7 + " " + 1 + " " + 60);
+				handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " "
+						+ 1.5);
 			} else {
 				handlerOut.sendMessage("Brake 0");
 				handlerOut.sendMessage("Accelerate 1");
@@ -130,7 +130,8 @@ public class ChaosBot extends AbstractBot {
 			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + 0.7);
 		} else {
 			// foe
-			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + angle);
+			handlerOut
+					.sendMessage("RotateAmount " + 7 + " " + 10 + " " + angle);
 			handlerOut.sendMessage("Shoot 5");
 			handlerOut.sendMessage("Shoot 5");
 			handlerOut.sendMessage("Shoot 5");
