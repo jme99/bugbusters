@@ -51,6 +51,9 @@ public class ChaosBot extends AbstractBot {
 						case INITIALIZE:
 							handlerOut.sendMessage("Accelerate "
 									+ model.getMaxAcceleartion());
+							handlerOut.sendMessage("Name ChaosBot"
+									+ " Team: BUG-BUSTERS");
+							handlerOut.sendMessage("Colour FF0000 00FF00");
 							break;
 						case RADAR:
 							consumeRadar(message);
