@@ -6,6 +6,8 @@ import bugbusters.bots.model.Message;
 
 public class ChaosBot extends AbstractBot {
 
+	private Object angle;
+
 	public ChaosBot() {
 		super();
 	}
@@ -89,7 +91,7 @@ public class ChaosBot extends AbstractBot {
 
 	private void consumeRadar(Message message) {
 		Double distance = message.getDistance();
-		Double angle = message.getAngle();
+		angle = message.getAngle();
 		switch (message.getObjectType()) {
 		case COOKIE:
 			moveToCookie(message);
@@ -126,9 +128,9 @@ public class ChaosBot extends AbstractBot {
 			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + 0.7);
 		} else {
 			// foe
-			handlerOut.sendMessage("Shoot 2");
+			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + angle);
+			handlerOut.sendMessage("Shoot 5");
 		}
-		handlerOut.sendMessage("Sweep " + 2 + " 10 10 10");
-		handlerOut.sendMessage("Shoot 5");
+		// handlerOut.sendMessage("Sweep " + 2 + " 10 10 10");
 	}
 }
