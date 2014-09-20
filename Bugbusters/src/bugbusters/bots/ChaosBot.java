@@ -84,7 +84,7 @@ public class ChaosBot extends AbstractBot {
 	}
 
 	private void moveToCookie(Message m) {
-		handlerOut.sendMessage("Rotate " + 7 + " " + 1 + " " + 0);
+		handlerOut.sendMessage("RotateTo " + 1 + " " + 1 + " " + m.getAngle());
 		handlerOut.sendMessage("Accelerate " + model.getMaxAcceleartion());
 	}
 
@@ -109,7 +109,7 @@ public class ChaosBot extends AbstractBot {
 		case WALL:
 			if (distance < 4.0) {
 				handlerOut.sendMessage("Brake 1");
-				handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " "
+				handlerOut.sendMessage("RotateAmount " + 1 + " " + 1 + " "
 						+ 0.6);
 			} else {
 				handlerOut.sendMessage("Brake 0");
@@ -124,11 +124,11 @@ public class ChaosBot extends AbstractBot {
 	private void consumeRobotInfo(Message message) {
 		if (message.isYesNo()) {
 			// friend
-			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + 0.35);
+			handlerOut.sendMessage("RotateAmount " + 1 + " " + 1 + " " + 0.35);
 		} else {
 			// foe
 			handlerOut
-					.sendMessage("RotateAmount " + 7 + " " + 10 + " " + angle);
+					.sendMessage("RotateAmount " + 1 + " " + 10 + " " + angle);
 			new Thread() {
 				public void run() {
 					for (int i = 0; i < 5; i++) {
