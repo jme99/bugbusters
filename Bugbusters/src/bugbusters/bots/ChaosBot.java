@@ -25,8 +25,6 @@ public class ChaosBot extends AbstractBot {
 					handlerOut.echo("Empfangen: " + line);
 					Message message = this.parseMessage(line);
 
-					handlerOut.sendMessage("Shoot 1");
-
 					if (message != null) {
 						switch (message.getType()) {
 						case COLLISION:
@@ -113,7 +111,7 @@ public class ChaosBot extends AbstractBot {
 			if (distance < 4.0) {
 				handlerOut.sendMessage("Brake 1");
 				handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " "
-						+ 1.5);
+						+ 0.6);
 			} else {
 				handlerOut.sendMessage("Brake 0");
 				handlerOut.sendMessage("Accelerate 1");
@@ -127,7 +125,7 @@ public class ChaosBot extends AbstractBot {
 	private void consumeRobotInfo(Message message) {
 		if (message.isYesNo()) {
 			// friend
-			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + 0.7);
+			handlerOut.sendMessage("RotateAmount " + 7 + " " + 1 + " " + 0.35);
 		} else {
 			// foe
 			handlerOut
